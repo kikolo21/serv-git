@@ -1,0 +1,69 @@
+Основные функциональные особенности и отличительные характеристики для рефакторинга кода сайта и быстрого равертывания:
+
+Нумерация бонусов должна строго соответствовать своим бонусам 1,2.. где очередность общая для горизонтальных и вертикальных бонусов и указывается в id_bonus_link
+Таким образом необходимо прописывать реальные ид названий бонусов в параметре "bname" и сам ид id_bonus_link
+
+Чтобы прописать все нужные ид ищи "/img/top-" - эти номера соответствуют зарегистрированным названиями бонусов в app_ongameuk.js -> links
+
++ 1) Указывается параметр bname для классов Main шаблона верстки
++ class="card", class="list-inline rating-list", class="ratings":
+
++ a) <section class="card-section" id="id_top_casino">
++ <div class="card" bname="bet365"> ->
+
++ b) <div class="card-ratet">
++ <div class="text-blue">Please vote!</div>
++ <ul class="list-inline rating-list" bname="bet365" data-rate="4" data-hover-rate="4"> -> блок рейти
+
++ s) <div><b class="ratings" bname="bet365"></b></div> -> блок рейтинга "Rated by ()" который будет генерировать js
+
++ d) <div class="top-card" bname="bet365">	-> блок карточки бонуса
+
++ 2) Соответствующий файл должен присутствовать - app_ongameuk.js (ongame[X])
++ В файле app_ongame[..].js также настраивается:
++ a) links: { .. } -> ссылки с ключами бинома 
++ b) blprms: { .. } -> для передачи входящих параметров сайта в бином
+
++ 3) В модуле Models\Api.php настраивается рейтинг (начальное значение отсчета рейтинга по бонусу)
+
++ 4) Указывается параметр id_bonus_link для всех бонусов горизонтальных и вертикальных слотов таким образом:
++ a) <a class="card-bonus" id="id_bonus_link1">GET BONUS</a> и убрать <a href="/" из <a -> для горизонтальных
++ b) <button class="primary-button card-bonus-primary" id="id_bonus_link11">GET BONUS</button> -> для вертикальных
+
++ 5) <button class="primary-button cls_but_send" id="id_but_send">Send</button> -> кнопка отправки формы должна иметь id="id_but_send"
+
++ 6) должны быть идентифицированы id:
++ <body id="id_about_us"
++ <a href="<? print config::https_host(); ?>#about_us" class="header_menu_link" id="id_lnk_about_us">About</a> ...
+
++ 7) в файле Js\vendor.min.js была удалена обработка клика по скроллу (учесть)
++ А именно $(".header_menu_link").click(function(e){}) не обрабатывала функция (так как выполняется другая обработка)
+
++ 8) Прописать пароль логин к бд в config.php
+
++ 9) Клики по логотипам футера должны правильно обрабатывать переход (см. js)
+
++ 10) Форма должна работать быть работать на ajax, без перезагрузки страницы, "<form" должно быть заменено на "<div class="form
+
++ 11) Секция должна быть идентифицирована "id_live_casino"
+    <section id="id_live_casino">
+    <h2 class="h2">TOP LIVE CASINO SITES 2021</h2>
+
++ 12) Секция должна быть идентифицирована "id_slots"
+    <section class="top-sites" id="id_slots">
+    <h2 class="h2">TOP ONLINE SLOTS SITES</h2>
+
++ 13) Секция должна быть идентифицирована "id_contact"
+    <section id="id_contact">
+    <div class="form">
+
++ 14) Секция должна быть идентифицирована "id_license"
+    <footer class="footer" id="id_license">
+    <div class="container">
+
++ 15) main.php заканчивается так:
++       <? ongameuk::js_onload_config(); ?>
++   </body>
++   </html>
+
+- 16) следить за ручным компилированием файлов js для использования на сервере

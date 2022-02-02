@@ -1,0 +1,44 @@
+Options -Indexes -ExecCGI
+
+<RequireAll>
+Require all granted
+</RequireAll>
+
+php_value error_reporting 0
+php_value upload_max_filesize 100M
+php_value post_max_size 100M
+
+ErrorDocument 400 /index.php?err=400
+ErrorDocument 401 /index.php?err=401
+ErrorDocument 403 /index.php?err=403
+ErrorDocument 404 /index.php?err=404
+ErrorDocument 500 /index.php?err=500
+
+# secur.htaccess
+<Files ".hta*">
+ Require all denied
+</Files>
+
+<Files ?\.(php|inc|jpeg|jpg|doc|docx|gif|bmp|xls|xlsx|xml|ppt|pptx|mp4)$?="">
+ Require all denied
+</Files>
+
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^.*$ index.php [L]
+
+RewriteRule ^bet365?$ index.php [L]
+RewriteRule ^grosvenor?$ index.php [L]
+RewriteRule ^grand-ivy?$ index.php [L]
+RewriteRule ^plaza-royal?$ index.php [L]
+RewriteRule ^dr-bet?$ index.php [L]
+RewriteRule ^energy?$ index.php [L]
+RewriteRule ^mrgreen?$ index.php [L]
+RewriteRule ^luck-land?$ index.php [L]
+RewriteRule ^play-ojo?$ index.php [L]
+RewriteRule ^dream-vegas?$ index.php [L]
+
+RewriteCond %{HTTP_HOST} ongameuk*$
+RewriteRule ^(robots.txt|re-favicon_32x32.png)$ $1 [L] 

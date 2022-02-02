@@ -1,0 +1,25 @@
+
+.card-bonus, .card-bonus-primary { color: white !important; cursor: pointer !important; }
+
+.card-bonus:hover, .card-bonus-primary:hover
+{
+    text-decoration: underline !important;
+}
+
+.header_menu_link.active { text-decoration: underline !important; }
+
+.main-screen__img.page_review { height:120px; }
+
+@media (min-width: 1201px) {
+    .card-text_bold { font-size: 23px !important; }
+    .card-rate-number { margin-right: 20px; }
+    .card-num { margin-right: 20px; }
+    .card_small { height:95px; }
+}
+
+@media (max-width: 767px) {
+    .card-logo {
+        height: 100%;
+        margin-bottom: 10px;
+    }
+}
